@@ -1,0 +1,53 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.done {
+  text-decoration: line-through;
+}
+
+p {
+  font-size: larger;
+}
+
+.customBtn {
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background-color: #000000;
+  color: white;
+  padding: 1rem 1rem;
+  margin: 0.75rem;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+.customCheckbox {
+  padding: auto;
+  width: 1rem;
+  height: 1rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+}
+
+.status {
+  padding: 1em;
+  width: 7rem;
+  text-align: center;
+  font-weight: lighter;
+  text-decoration: line-through;
+}
+
+.UNDONE {
+  background-color: white;
+  text-decoration-style: dotted;
+  text-decoration: line-through;
+  text-decoration-color: black;
+  font-weight: bold;
+}
