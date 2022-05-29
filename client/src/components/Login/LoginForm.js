@@ -20,7 +20,8 @@ const LoginForm = () => {
     setEnteredPassword(event.target.value);
   };
 
-  const loginHandler = () => {
+   function loginHandler(e) {
+    e.preventDefault();
     console.log(
       enteredEmail.length,
       enteredEmail.includes("@"),
@@ -35,24 +36,24 @@ const LoginForm = () => {
         email: enteredEmail,
         password: enteredPassword,
       };
-      axios
+       axios
         .post("http://localhost:8080/users/login", user)
-        .then((token) =>
-          localStorage.setItem("jwtToken", JSON.stringify(token)),
+        .then(
+          (token) => localStorage.setItem("jwtToken", JSON.stringify(token)),
           localStorage.setItem("username", user.email)
         )
         .then((response) => console.log("User logged in"))
+        .then(() => window.location.reload())
         .catch((error) => {
           console.error("There was an error!", error);
-          alert("unsuccessful");
+          alert("Unsuccessful");
         });
       setEnteredEmail("");
       setEnteredPassword("");
     } else {
       alert("WRONG INPUT");
     }
-    window.location.reload(false);
-  };
+  }
 
   return (
     <form onSubmit={loginHandler}>

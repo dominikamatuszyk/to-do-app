@@ -25,7 +25,8 @@ const RegisterForm = () => {
     setEnteredPassword2(event.target.value);
   };
 
-  const registerHandler = () => {
+  const registerHandler = (e) => {
+    e.preventDefault();
     if (
       enteredEmail.length > 0 &&
       enteredEmail.includes("@") &&
