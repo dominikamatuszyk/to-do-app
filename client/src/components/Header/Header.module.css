@@ -28,3 +28,10 @@
   height: 100%;
   object-fit: cover;
 }
+
+.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  background-color: white;
+  color: black;
+}

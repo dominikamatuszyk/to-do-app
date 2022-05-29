@@ -7,18 +7,27 @@ import Task from "../Task/Task";
 
 const TaskList = (props) => {
   const [tasks, setTasks] = useState([]);
+  const tokenStr = localStorage.getItem("jwtToken");
+  var jwtToken = "";
+  if (tokenStr !== "") {
+    const token = JSON.parse(tokenStr);
+    jwtToken = token.data.token;
+  }
 
   useEffect(() => {
     axios
       .get("http://localhost:8080/tasks", {
-        headers: { "Access-Control-Allow-Origin": "*" },
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Authorization: "Bearer " + jwtToken,
+        },
       })
       .then((res) => {
         setTasks(res.data);
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [jwtToken]);
 
   const taskList = tasks.map((task) => (
     <Task
@@ -34,7 +43,6 @@ const TaskList = (props) => {
     const sorter = (a, b) => {
       return new Date(a.date).getTime() - new Date(b.date).getTime();
     };
-    console.log([...tasks].sort(sorter));
     setTasks([...tasks].sort(sorter));
   };
 

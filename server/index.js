@@ -2,8 +2,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config();
 const app = express();
 const port = 8080;
+const passport = require("passport");
+require("./auth/passport");
 
 mongoose.connect(
   "mongodb+srv://matuszyk:Haslo1234@tododatabase.gi9h8.mongodb.net/ToDoDatabase?retryWrites=true&w=majority",
@@ -36,4 +40,4 @@ const tasksRoutes = require("./controllers/task.controller");
 const userRoutes = require("./controllers/user.controller");
 
 app.use("/tasks", tasksRoutes);
-app.use("/login", userRoutes);
+app.use("/users", userRoutes);

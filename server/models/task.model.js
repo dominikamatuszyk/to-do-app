@@ -5,6 +5,10 @@ const taskSchema = new Schema({
   name: { type: String, required: true },
   date: { type: Date, default: Date.now },
   isDone: { type: String, default: "false" },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 const Task = mongoose.model("Task", taskSchema);

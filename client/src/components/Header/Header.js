@@ -3,21 +3,26 @@ import styles from "./Header.module.css";
 import Img from "../../assets/productivity.jpg";
 
 const Header = () => {
-  const user = null;
+  const tokenStr = localStorage.getItem("jwtToken");
+  const logoutHandler = () => {
+    localStorage.setItem("jwtToken", "");
+    window.location.reload(false);
+  };
+
   return (
     <Fragment>
       <div className={styles.header}>
         <h1>TO-DO LIST</h1>
         <div>
-          {user ? (
+          {tokenStr !== "" && (
             <div>
-              <h2>{user.result.name.charAt(0)}</h2>
-              <button className={styles.ctmBtn}>Log out</button>
-            </div>
-          ) : (
-            <div>
-              <button className={styles.ctmBtn}>Log in</button>
-              <button className={styles.ctmBtn}>Sign in</button>
+              {console.log(localStorage.getItem("username"))}
+              <button className={styles.disabled}>
+                {localStorage.getItem("username").charAt(0).toLocaleUpperCase()}
+              </button>
+              <button className={styles.ctmBtn} onClick={logoutHandler}>
+                Log out
+              </button>
             </div>
           )}
         </div>

@@ -5,6 +5,13 @@ import styles from "./TaskForm.module.css";
 const TaskForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
+  const tokenStr = localStorage.getItem("jwtToken");
+  var jwtToken = "";
+  if (tokenStr !== "") {
+    const token = JSON.parse(tokenStr);
+    jwtToken = token.data.token;
+  }
+  
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -16,14 +23,17 @@ const TaskForm = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(enteredDate.toString());
     if (enteredDate.toString().length > 0 && enteredTitle.length > 0) {
       const newTask = {
         name: enteredTitle,
         date: new Date(enteredDate),
       };
       axios
-        .post("http://localhost:8080/tasks", newTask)
+        .post("http://localhost:8080/tasks", newTask, {
+          headers: {
+            Authorization: "Bearer " + jwtToken,
+          },
+        })
         .then((response) => console.log("Task added"))
         .catch((error) => {
           console.error("There was an error!", error);
